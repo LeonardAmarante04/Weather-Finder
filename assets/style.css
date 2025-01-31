@@ -46,11 +46,13 @@ body {
 
 /* Styles for the background video */
 #background-video {
-  object-fit: cover; /* Ensures the video fully covers the screen */
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  opacity: 1; /* Fully visible by default */
-  transition: opacity 1s ease-in-out; /* Smooth transition effect */
+  object-fit: cover; /* Ensures the video covers the entire background */
+  z-index: -1; /* Places the video behind content */
 }
 
 /* Hides the info section by default */
