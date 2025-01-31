@@ -6,35 +6,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Finder</title>
     <link href="./assets/style.css" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
+    <!-- Boostrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-
+    <!-- main div  -->
     <div class="container-fluid">
+        <!-- video background section -->
+        <div class="video-background col-lg-12">
+            <!-- video tag & attributes -->
+            <video autoplay muted loop id="background-video">
+                <!-- video source file path -->
+                <source id = "sourceVideo" src="./assets/weatherVideos/weatherFinderBackground.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- main header div holder -->
         <div class="row">
-            <div class="col-lg-12 centered">
-                <h1 style="color: white; font-family: 'Times New Roman', Times, serif; font-size: 60px;"> Weather Finder
-                    <img src="./assets/sun-image.png" width="80px" height="80px"></h1>
+            <div class="col-lg-12" style="display: flex; justify-content: center; align-items: center;">
+                <div class="col-lg-4">
+                    <!-- main header styles and value -->
+                    <h1
+                        style="color: white; font-family: 'Times New Roman', Times, serif; font-size: 60px; text-align: center;">
+                        Weather Finder
+                        <!-- weather icon with source path -->
+                        <img id="weatherIcon" src="./assets/sun-image.png" width="80px" height="80px">
+                    </h1>
+                </div>
             </div>
         </div>
-        <div class="row">
+
+        <!-- city temperature search div  -->
+        <div class="row" style="display: flex; justify-content: center; align-items: center; margin-top: 80px;">
             <div class="col-lg-4">
-                <input class="form-control" type="text" placeholder="Write a city!" id="userInput">
-                <button class="btn btn-default btn-light" style="margin-top: 10px; margin-right: 590px;">Submit</button>
+                <div class="container-ex">
+                    <!-- user input for writting city -->
+                    <input class="form-control" type="text" placeholder="Write a city!" id="userInput">
+
+
+                    <!-- radio button for user choice of temperature unit -->
+                    <label class="" for="unit">
+                        <h6 style="color: white;">Choose your temperature Unit:</h6>
+                        <input id="f-unit" type="radio" name="unit">
+                        <span class="white-color">Fahrenheit</span>
+                        <input id="c-unit" type="radio" name="unit" class="space">
+                        <span class="white-color">celsius</span>
+                    </label>
+                </div>
+
+                <!-- submit button for searching city with temperature unit choice -->
+                <button id="submitInput" class="btn btn-default btn-light"
+                    style="margin-top: 10px; margin-right: 590px;">Submit</button>
+
             </div>
 
         </div>
-    </div>
 
-    <!--boostrap js-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="./assets/script.js"></script>
-    <!-- <script type = "module" src="./assets/weather.js"></script> -->
+        <!-- div to make section show no display -->
+        <div id="infoVisibility" class="row">
+
+            <!-- Main weather info  div-->
+            <div id="mainWeatherInfo" class="row"
+                style="margin-top: 100px;display: flex;justify-content: center; align-items: center;">
+
+                <!-- header for main temperature -->
+                <h4 class="white-color" style="text-align: center;">Today temp:</h4>
+                <!-- div for temperature details with styles for background div -->
+                <div class="col-lg-3 white-color" id="mainWeatherHolder"
+                    style="border: 2px solid #0093E9; border-radius:10px; background-color: #0093E9;background-image: linear-gradient(270deg, #0093E9 0%, #80D0C7 100%);">
+
+                    <!-- main temperature information here: -->
+                    <h3 class="fs-4" id="cityName"></h3>
+                    <h4 class="fs-5" id="temperature" class=""></h4>
+                    <h6 class="fs-6" id="max-min-temp"></h6>
+
+
+                </div>
+
+
+                <!-- div for 5 days forecast  -->
+                <div id="daysWeather" class="row"
+                    style="margin-top: 80px ; display: flex;justify-content: center; align-items: center; margin-right: 10px;">
+                    <!-- tittle for 5 days forecast section -->
+                    <h4 class="fs-5" style="text-align: center; color: white;"> 5 days forecast</h4>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <script type="module" src="./assets/script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
 </body>
 
 </html>

@@ -1,12 +1,59 @@
-body {
- background-color: #0093E9;
-background-image: linear-gradient(90deg, #0093E9 0%, #80D0C7 100%);
-background-size: cover;
-    text-align: center;
-  }
-
-
-.centered {
-    text-align: center;
+/* Reset default margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Styling for the body, including a gradient background and centered text */
+body {
+  background-color: #0093E9;
+  background-image: linear-gradient(90deg, #0093E9 0%, #80D0C7 100%);
+  background-size: cover;
+  text-align: center;
+}
+
+/* Utility class to center text */
+.centered {
+  text-align: center;
+}
+
+/* Utility class to set text color to white */
+.white-color {  
+  color: white;
+}
+
+/* Adds left margin spacing */
+.space {
+  margin-left: 10px;
+}
+
+/* Defines font size for h2 elements */
+.h2_size {
+  font-size: 20px;
+}
+
+/* Styles for a video background container */
+.video-background {
+  position: fixed; /* Keeps the video fixed as the background */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensures it stays behind content */
+  overflow: hidden;
+}
+
+/* Styles for the background video */
+#background-video {
+  object-fit: cover; /* Ensures the video fully covers the screen */
+  width: 100%;
+  height: 100%;
+  opacity: 1; /* Fully visible by default */
+  transition: opacity 1s ease-in-out; /* Smooth transition effect */
+}
+
+/* Hides the info section by default */
+#infoVisibility {
+  display: none;
+}
