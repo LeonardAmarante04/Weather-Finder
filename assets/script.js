@@ -54,7 +54,7 @@ submitInput.addEventListener("click", function () {
             try {
 
                 // Geo API DATA FETCH & MANIPULATION
-                const geoAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${userCity}&limit=5&appid=${weather_api_key}`;
+                const geoAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${userCity}&limit=5&appid=${weather_api_key}`;
                 const geoResponse = await fetch(geoAPI);
                 const geoData = await geoResponse.json();
                 if (geoData.length === 0) {
