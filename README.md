@@ -13,5 +13,4 @@ A simple and responsive web application that allows users to search for real-tim
 - HTML, CSS, JavaScript (Frontend)
 - OpenWeather API (for fetching weather data)
 
-## How to Use 🚀
-1. Clone the repository:
+url(https://leonardamarante04.github.io/Weather-Finder/)
