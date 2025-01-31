@@ -1,7 +1,6 @@
 const encryptedKey1 = btoa(`2294cc450dbd115f9a7714ec9ec6a4cd`);
-const encryptedKey2 = btoa(`IXLM5PMCEHKA`);
 const weather_api_key = atob(encryptedKey1);
-const timezone_api_key = atob(encryptedKey2);
+
 
 
 // global variables for storing weather information and styles
@@ -80,13 +79,15 @@ submitInput.addEventListener("click", function () {
 
 
                 // timezone API DATA FETCH & MANIPULATION
-                const timezoneUrl = `http://api.timezonedb.com/v2.1/get-time-zone?key=IXLM5PMCEHKA&format=json&by=position&lat=${lat}&lng=${lon}`
+                const timezoneUrl = `https://timeapi.io/api/time/current/coordinate?latitude=${lat}&longitude=${lon}`
                 const timezoneResponse = await fetch(timezoneUrl);
                 const timezoneData = await timezoneResponse.json();
-                const cityTime = timezoneData.formatted
-                cityHours = cityTime.substring(10, 13);
-                const sundownTime = new Date(sundownUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.zoneName}` })
-                const sunupTime = new Date(sunupUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.zoneName}` })
+                console.log(timezoneData)
+                const cityTime = timezoneData.dateTime 
+                cityHours = cityTime.substring(11, 13);
+                console.log(cityHours)
+                const sundownTime = new Date(sundownUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.timeZone}` })
+                const sunupTime = new Date(sunupUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.timeZone}` })
                 sunDownHour = sundownTime.substring(0, 2);
                 sunUpHour = sunupTime.substring(0, 2);
 
