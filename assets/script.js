@@ -1,8 +1,6 @@
 const encryptedKey1 = btoa(`2294cc450dbd115f9a7714ec9ec6a4cd`);
 const weather_api_key = atob(encryptedKey1);
 
-
-let video = document.getElementById('background-video');
 // global variables for storing weather information and styles
 let weatherData, forecastWeatherData, weatherDiv_created = false, weatherDate,
     weathertemp, maxMin_temp, iconImg, srt, weatherDescription, cityHours, sunDownHour, sunUpHour, backgroundColor, backgroundImage, weatherdivHolders;
@@ -18,7 +16,7 @@ submitInput.addEventListener("click", function () {
     // temperature unit conditions & storage values into variables
     const userCity = document.getElementById("userInput").value
     const fUnit = document.getElementById("f-unit");
-    const cUnit = document.getElementById("c-unit")
+    const cUnit = document.getElementById("c-unit");
     let unit;
     let unitSymbol;
 
@@ -46,6 +44,7 @@ submitInput.addEventListener("click", function () {
     }
     else {
 
+        // fetchWeatherData async function!
         async function fetchWeatherdata() {
 
 
@@ -53,42 +52,48 @@ submitInput.addEventListener("click", function () {
             try {
 
                 // Geo API DATA FETCH & MANIPULATION
-                const geoAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${userCity}&limit=5&appid=${weather_api_key}`;
-                const geoResponse = await fetch(geoAPI);
+                const geoResponse = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userCity}&limit=5&appid=${weather_api_key}`);
                 const geoData = await geoResponse.json();
+
+                // condition for if geoData.legnt is equal to 0 than storage error city not found
                 if (geoData.length === 0) {
                     throw new Error("City not found");
                 }
 
+
+
                 const { lat, lon } = geoData[0];
 
 
-
                 // Geo API DATA FETCH & MANIPULATION
-                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weather_api_key}&units=${unit}`;
-                const weatherResponse = await fetch(weatherUrl);
-                weatherData = await weatherResponse.json()
+                const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weather_api_key}&units=${unit}`);
+                weatherData = await weatherResponse.json();
                 weatherDescription = weatherData.weather[0].main;
+                // gets sunset data from weatherData API
                 const sundownUnix = weatherData.sys.sunset
+                 // gets sunrise data from weatherData API
                 const sunupUnix = weatherData.sys.sunrise
-
+             
                 // five day weather forecast API DATA FETCH & MANIPULATION
-                const forecastWeahterUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weather_api_key}&units=${unit}`;
-                const forecastWeatherResponse = await fetch(forecastWeahterUrl);
+                const forecastWeatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weather_api_key}&units=${unit}`);
                 forecastWeatherData = await forecastWeatherResponse.json()
 
 
+
                 // timezone API DATA FETCH & MANIPULATION
-                const timezoneUrl = `https://timeapi.io/api/time/current/coordinate?latitude=${lat}&longitude=${lon}`
-                const timezoneResponse = await fetch(timezoneUrl);
+                const timezoneResponse = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}&username=LeonardA04`);
                 const timezoneData = await timezoneResponse.json();
-                console.log(timezoneData)
-                const cityTime = timezoneData.dateTime 
+                // gets the date and time data of timezone API
+                const cityTime = timezoneData.time;
+                // filters cityTime string value between a start value and a end value which is the new value of the cityHours variable
                 cityHours = cityTime.substring(11, 13);
-                console.log(cityHours)
-                const sundownTime = new Date(sundownUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.timeZone}` })
-                const sunupTime = new Date(sunupUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.timeZone}` })
+                // converts the sunset unix value into a readable format 
+                const sundownTime = new Date(sundownUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.timezoneId}` })
+                  // converts the sunrise unix value into a readable format 
+                const sunupTime = new Date(sunupUnix * 1000).toLocaleTimeString("en-GB", { timeZone: `${timezoneData.timezoneId}` })
+                // filters sunDownHour string value between a start value and a end value which is the new value of the sunDownHour variable
                 sunDownHour = sundownTime.substring(0, 2);
+                // filters sunUpHour string value between a start value and a end value which is the new value of the sunUpHour variable
                 sunUpHour = sunupTime.substring(0, 2);
 
 
@@ -102,8 +107,7 @@ submitInput.addEventListener("click", function () {
                     backgroundColor = `rgb(11,11,11)`;
                     backgroundImage = `url(./assets/nightStars.jpeg)`;
 
-                    console.log("Is Night Time!!!!")
-                    console.log(weatherDescription)
+                    
                     const weatherMessages = {
                         "Clouds": `./assets/weatherVideos/nightClouds.mp4`,
                         "Clear": `./assets/weatherVideos/clearNight.mp4`,
@@ -114,11 +118,10 @@ submitInput.addEventListener("click", function () {
                     }
 
                     if (weatherMessages[weatherDescription]) {
-                        document.getElementById("sourceVideo").src = weatherMessages[weatherDescription];
-                        console.log(document.getElementById("background-video"));
-                        
-                        video.load()
-                        video.play()
+                        document.getElementById("background-video").src = weatherMessages[weatherDescription];
+
+
+
                     }
 
                     else {
@@ -148,12 +151,11 @@ submitInput.addEventListener("click", function () {
                     };
 
 
-                    // condition for changing the background video source according to the weather description
+                    // condition for changing the background document.getElementById("background-video") source according to the weather description
                     if (weatherMessages[weatherDescription]) {
-                        document.getElementById("sourceVideo").src = weatherMessages[weatherDescription];
+                        document.getElementById("background-video").src = weatherMessages[weatherDescription];
 
-                        video.load()
-                        video.play()
+
                     }
 
 
@@ -250,17 +252,18 @@ submitInput.addEventListener("click", function () {
 
                 else {
 
+
+                    // if divs are created than just change the contenct of the elements already created  
                     for (let q = 0; q < 5; q++) {
+                        
                         document.getElementById(`weatherDivHolder${q}`).style.backgroundColor = backgroundColor;
                         document.getElementById(`weatherDivHolder${q}`).style.backgroundImage = backgroundImage;
                         document.getElementById(`weatherDivHolder${q}`).style.border = `solid 2px ${backgroundColor}`;
                         iconImg = document.createElement("img");
                         srt = fiveDayWeather[q].dt_txt
                         iconImg.src = `http://openweathermap.org/img/wn/${fiveDayWeather[q].weather[0].icon}.png`;
-                        //  console.log(document.getElementById(`iconImg${q}`))
                         document.getElementById(`weatherDate${q}`).textContent = srt.substring(0, 10);
-                        document.getElementById(`weatherDate${q}`).appendChild(iconImg)
-                        // document.getElementById(`weatherDate${q}`).appendChild(document.getElementById(`iconImg${q}`));
+                        document.getElementById(`weatherDate${q}`).appendChild(iconImg);
                         document.getElementById(`weatherTemp${q}`).textContent = `Temperature: ${Math.floor(fiveDayWeather[q].main.temp)}${unitSymbol}`;
                         document.getElementById(`maxMinTemp${q}`).textContent = `Min: ${Math.floor(fiveDayWeather[q].main.temp_min)}${unitSymbol} Max: ${Math.floor(fiveDayWeather[q].main.temp_max)}${unitSymbol}`;
 
@@ -286,8 +289,5 @@ submitInput.addEventListener("click", function () {
 
 
 });
-
-
-
 
 
