@@ -143,7 +143,7 @@ submitInput.addEventListener("click", function () {
 
                     // weatherMessages object with weather description key names and values!
                     const weatherMessages = {
-                        "Clouds": `./assets/weatherVideos/daycloud.mp4`,
+                        "Clouds": `./assets/weatherVideos/dayCloud.mp4`,
                         "Clear": `./assets/weatherVideos/clearSky.mp4`,
                         "Snow": `./assets/weatherVideos/snowfix.mp4`,
                         "Rain": `./assets/weatherVideos/rain.mp4`,
