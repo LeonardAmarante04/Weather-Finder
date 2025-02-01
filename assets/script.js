@@ -2,7 +2,7 @@ const encryptedKey1 = btoa(`2294cc450dbd115f9a7714ec9ec6a4cd`);
 const weather_api_key = atob(encryptedKey1);
 
 
-
+let video = document.getElementById('background-video');
 // global variables for storing weather information and styles
 let weatherData, forecastWeatherData, weatherDiv_created = false, weatherDate,
     weathertemp, maxMin_temp, iconImg, srt, weatherDescription, cityHours, sunDownHour, sunUpHour, backgroundColor, backgroundImage, weatherdivHolders;
@@ -114,8 +114,11 @@ submitInput.addEventListener("click", function () {
                     }
 
                     if (weatherMessages[weatherDescription]) {
-                        document.getElementById("background-video").src = weatherMessages[weatherDescription];
+                        document.getElementById("sourceVideo").src = weatherMessages[weatherDescription];
                         console.log(document.getElementById("background-video"));
+                        
+                        video.load()
+                        video.play()
                     }
 
                     else {
@@ -147,7 +150,10 @@ submitInput.addEventListener("click", function () {
 
                     // condition for changing the background video source according to the weather description
                     if (weatherMessages[weatherDescription]) {
-                        document.getElementById("background-video").src = weatherMessages[weatherDescription];
+                        document.getElementById("sourceVideo").src = weatherMessages[weatherDescription];
+
+                        video.load()
+                        video.play()
                     }
 
 
