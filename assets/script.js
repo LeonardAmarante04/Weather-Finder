@@ -81,7 +81,7 @@ submitInput.addEventListener("click", function () {
 
 
                 // timezone API DATA FETCH & MANIPULATION
-                const timezoneResponse = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}&username=LeonardA04`);
+                const timezoneResponse = await fetch(`https://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}&username=LeonardA04`);
                 const timezoneData = await timezoneResponse.json();
                 // gets the date and time data of timezone API
                 const cityTime = timezoneData.time;
