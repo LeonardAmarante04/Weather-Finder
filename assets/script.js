@@ -93,7 +93,9 @@ document.querySelector('body').addEventListener('click', function () {
 
 // click event listener for submit button
 submitInput.addEventListener("click", function () {
-
+    
+// sets display to autocomplete holder to none
+document.getElementById("autocompleteHolder").style.display = "none";
 
     // temperature unit conditions & storage values into variables
     const userCity = userInput.value
