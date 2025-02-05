@@ -5,8 +5,15 @@
   box-sizing: border-box;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+}
+
 /* Styling for the body, including a gradient background and centered text */
 body {
+  margin: 0;
+  padding: 0;
   background-color: #0093E9;
   background-image: linear-gradient(90deg, #0093E9 0%, #80D0C7 100%);
   background-size: cover;
@@ -19,7 +26,7 @@ body {
 }
 
 /* Utility class to set text color to white */
-.white-color {  
+.white-color {
   color: white;
 }
 
@@ -48,11 +55,56 @@ body {
 #background-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;  /* Ensures the video fills the background */
-  opacity: 0.8; /* Slight transparency to make content more readable */
+  object-fit: cover;
+  /* Ensures the video fills the background */
+  opacity: 0.8;
+  /* Slight transparency to make content more readable */
 }
 
 /* Hides the info section by default */
 #infoVisibility {
   display: none;
 }
+
+ul {
+  list-style-type: none;
+  /* Removes the bullet points */
+  padding: 0;
+  /* Optional: removes default padding */
+
+}
+
+
+.autocompleterText {
+  padding: 10px 20px;
+  background-color: white; /* Initial background color for button */
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  list-style: none;
+}
+
+/* When hovering over the <li> or <button>, both are highlighted */
+.autocompleterText:hover, .autocompleterText:focus {
+  background-color: lightblue; /* Light blue background on hover */
+}
+
+/* Add styles when the <li> or <button> is clicked (active) */
+.autocompleterText:active {
+  background-color: deepskyblue; /* Different color on click */
+}
+
+/* To ensure button inside li behaves the same */
+.autocompleterText li:hover {
+  background-color: lightblue; /* Highlight li when hovered */
+}
+
+.autocompleterText li:active {
+  background-color: deepskyblue; /* Same for active state */
+}
+
+.autocompleterText button {
+  width: 100%;
+}
+
